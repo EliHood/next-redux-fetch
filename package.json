@@ -1,0 +1,36 @@
+{
+  "name": "next-redux-fetch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "bootstrap": "lerna exec yarn install",
+    "start": "lerna run  --parallel start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EliHood/next-redux-fetch.git"
+  },
+  "author": "Eli Hood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EliHood/next-redux-fetch/issues"
+  },
+  "homepage": "https://github.com/EliHood/next-redux-fetch#readme",
+  "dependencies": {
+
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3",
+    "lerna": "^8.0.0"
+  }
+}
