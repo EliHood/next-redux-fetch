@@ -1,4 +1,9 @@
 src/
+# ignore the .ts files
+*.ts
+
+# include the .d.ts files
+!*.d.ts
 index.ts
 tsconfig.json
 .eslintrc*
