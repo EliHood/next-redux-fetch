@@ -10,6 +10,8 @@
 
 ### Current flow might change
 
+#### 1) Declare thunk functions
+
 ```javascript
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const fetchContent = createAsyncThunk(
@@ -31,6 +33,8 @@ export const fetchContent1 = createAsyncThunk(
 );
 ```
 
+#### 2) import in `createReduxFetch`
+
 ```javascript
 import { fetchContent, fetchContent1 } from "./thunkActions";
 import { createReduxFetch } from "../../../next-redux-fetch";
@@ -45,14 +49,14 @@ export const store = createReduxFetch({
 ....
 ```
 
+#### 3) Declare `getData` callback as followed:
+
 ```javascript
 import { store } from "../../../redux/store/store";
 import Bootstrap from "./bootstrap";
 
 async function getData() {
   const res = await store.dispatch(store.thunkActions.fetchContent());
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
 
   return res;
 }
@@ -66,6 +70,6 @@ export default async function Page() {
 }
 ```
 
-Result
+### Result
 
 ![Alt text](image.png)
