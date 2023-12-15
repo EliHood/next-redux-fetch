@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { configureStore } from "@reduxjs/toolkit";
 import { memoize } from "lodash";
-import { ApiMappedType, NewStoreReturnType, OldOptions } from "./types";
+import { ApiMappedType, NewReturnType, OlderOptions } from "./types";
 
 /**
  *
@@ -9,32 +9,32 @@ import { ApiMappedType, NewStoreReturnType, OldOptions } from "./types";
  * @returns
  */
 
-export function createReduxFetch<T>(
-  newOptions: OldOptions<T>,
-): NewStoreReturnType<T> {
+export function createReduxFetch<T, A>(
+  newOptions: OlderOptions<T, A>,
+): NewReturnType<T, A> {
   const store = configureStore;
   const thunkActions = newOptions?.thunkActions;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const newFuncObj = Object.keys(thunkActions).reduce(
-    (acc, fn): ApiMappedType<T> => {
+    (acc, fn): ApiMappedType<A> => {
       const memo = memoize?.(thunkActions?.[fn]);
-      return { ...acc, [fn]: memo } as ApiMappedType<T>;
+      return { ...acc, [fn]: memo } as ApiMappedType<A>;
     },
     {},
-  ) as ApiMappedType<T>;
+  ) as ApiMappedType<A>;
 
-  function oldOptions() {
+  function oldOptions(): Omit<OlderOptions<T, A>, "thunkActions"> {
     delete newOptions.thunkActions;
     return newOptions;
   }
 
-  const mergeOptions: NewStoreReturnType<T> = {
+  const mergeOptions: NewReturnType<T, A> = {
     ...store(oldOptions()),
     thunkActions: { ...newFuncObj },
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const newStore: NewStoreReturnType<T> = {
+  const newStore: NewReturnType<T, A> = {
     ...mergeOptions,
   };
 
