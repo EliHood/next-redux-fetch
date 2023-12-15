@@ -1,1 +1,1 @@
-export { createReduxFetch } from "./src";
+export * from "./src";
