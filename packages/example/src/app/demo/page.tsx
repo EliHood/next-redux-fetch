@@ -11,6 +11,6 @@ async function getData() {
 
 export default async function Page() {
   const data = await getData();
-
+  console.log("data", data?.payload);
   return <Bootstrap data={data} />;
 }

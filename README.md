@@ -7,3 +7,65 @@
 ### To use
 
 - `yarn add next-redux-fetch`
+
+### Current flow might change
+
+```javascript
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+export const fetchContent = createAsyncThunk(
+  "content/fetchContent",
+  async () => {
+    const res = await fetch("https://jsonplaceholder.typicode.com/photos");
+    const data = await res.json();
+    return data;
+  },
+);
+
+export const fetchContent1 = createAsyncThunk(
+  "content/fetchContent",
+  async () => {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const data = await res.json();
+    return data;
+  },
+);
+```
+
+```javascript
+import { fetchContent, fetchContent1 } from "./thunkActions";
+import { createReduxFetch } from "../../../next-redux-fetch";
+import { configureStore } from "@reduxjs/toolkit";
+export const store = createReduxFetch({
+  reducer: {},
+  thunkActions: {
+    fetchContent,
+    fetchContent1
+  },
+});
+....
+```
+
+```javascript
+import { store } from "../../../redux/store/store";
+import Bootstrap from "./bootstrap";
+
+async function getData() {
+  const res = await store.dispatch(store.thunkActions.fetchContent());
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+
+  return res;
+}
+
+export default async function Page() {
+  const data = await getData();
+
+  console.log("data", data?.payload);
+
+  return <Bootstrap data={data} />;
+}
+```
+
+Result
+
+![Alt text](image.png)
