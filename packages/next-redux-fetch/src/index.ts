@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { configureStore } from "@reduxjs/toolkit";
 import { memoize } from "lodash";
 import { ApiMappedType, NewStoreReturnType, OldOptions } from "./types";
@@ -7,6 +8,10 @@ import { ApiMappedType, NewStoreReturnType, OldOptions } from "./types";
  * @param newOptions
  * @returns
  */
+
+export function createReduxFetch<T>(
+  newOptions: OldOptions<T>,
+): NewStoreReturnType<T>;
 export function createReduxFetch<T>(
   newOptions: OldOptions<T>,
 ): NewStoreReturnType<T> {
