@@ -1,6 +1,6 @@
 import { fetchContent } from "./thunkActions";
 import { createReduxFetch } from "../../../next-redux-fetch";
-import { configureStore } from "@reduxjs/toolkit";
+
 export const store = createReduxFetch({
   reducer: {},
   thunkActions: {
