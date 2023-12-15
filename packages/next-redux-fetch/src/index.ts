@@ -14,7 +14,7 @@ export function createReduxFetch<T, A>(
 ): NewReturnType<T, A> {
   const store = configureStore;
   const thunkActions = newOptions?.thunkActions;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const newFuncObj = Object.keys(thunkActions).reduce(
     (acc, fn): ApiMappedType<A> => {
       const memo = memoize?.(thunkActions?.[fn]);
@@ -33,7 +33,6 @@ export function createReduxFetch<T, A>(
     thunkActions: { ...newFuncObj },
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const newStore: NewReturnType<T, A> = {
     ...mergeOptions,
   };
