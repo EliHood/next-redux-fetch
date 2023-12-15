@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import {
   Action,
   ConfigureStoreOptions,
@@ -48,7 +49,12 @@ export type OldOptions<T> = Omit<
   "dispatch" | "getState" | "subscribe" | "replaceReducer"
 >;
 
+export type DispatchType<T, StateExt extends {} = {}> = Pick<
+  EnhancedStore<T>,
+  "dispatch"
+> & { getState: T & StateExt };
+
 export type NewStoreReturnType<T> = Pick<
   MainNewStore<T>,
-  "dispatch" | "getState" | "subscribe" | "replaceReducer" | "thunkActions"
-> & { [Symbol.observable] };
+  "subscribe" | "replaceReducer" | "thunkActions"
+> & { [Symbol.observable] } & DispatchType<T>;

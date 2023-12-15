@@ -7,7 +7,6 @@
     "outDir": "dist",
     "skipLibCheck": true,
     "baseUrl": "./",
-    "jsx": "react",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": false,
@@ -18,7 +17,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noImplicitAny": false,
-    "rootDir": "./"
+
   },
 
   "include": ["src", "./index.ts"],

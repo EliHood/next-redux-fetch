@@ -1,12 +1,12 @@
-# src/
-# # ignore the .ts files
-# *.ts
-# dist/*.ts
-# dist/src/*.ts
-# # include the .d.ts files
-# !*.d.ts
-# index.ts
-# tsconfig.json
-# .eslintrc*
-# .editorconfig
-# tsconfig.tsbuildinfo
+src/
+# ignore the .ts files
+*.ts
+dist/*.ts
+dist/src/*.ts
+# include the .d.ts files
+!*.d.ts
+index.ts
+tsconfig.json
+.eslintrc*
+.editorconfig
+tsconfig.tsbuildinfo

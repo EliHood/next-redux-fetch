@@ -11,9 +11,6 @@ import { ApiMappedType, NewStoreReturnType, OldOptions } from "./types";
 
 export function createReduxFetch<T>(
   newOptions: OldOptions<T>,
-): NewStoreReturnType<T>;
-export function createReduxFetch<T>(
-  newOptions: OldOptions<T>,
 ): NewStoreReturnType<T> {
   const store = configureStore;
   const thunkActions = newOptions?.thunkActions;
