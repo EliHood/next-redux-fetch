@@ -6,7 +6,6 @@
     "allowJs": true,
     "outDir": "dist",
     "skipLibCheck": true,
-    "baseUrl": "./",
     "jsx": "react",
     "esModuleInterop": true,
     "emitDeclarationOnly": true,
