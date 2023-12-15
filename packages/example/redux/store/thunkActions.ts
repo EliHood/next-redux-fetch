@@ -8,3 +8,12 @@ export const fetchContent = createAsyncThunk(
     return data;
   },
 );
+
+export const fetchContent1 = createAsyncThunk(
+  "content/fetchContent",
+  async () => {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const data = await res.json();
+    return data;
+  },
+);

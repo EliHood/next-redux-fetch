@@ -1,1 +1,1 @@
-export { nextReduxFetch } from "./src";
+export { createReduxFetch } from "./src";
