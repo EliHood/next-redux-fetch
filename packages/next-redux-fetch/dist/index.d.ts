@@ -1,1 +1,0 @@
-export { createReduxFetch } from "./src";
