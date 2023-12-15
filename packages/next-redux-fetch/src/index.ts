@@ -55,6 +55,11 @@ type NewStoreReturnType<T> = Pick<
   "dispatch" | "getState" | "subscribe" | "replaceReducer" | "thunkActions"
 > & { [Symbol.observable] };
 
+/**
+ *
+ * @param newOptions
+ * @returns
+ */
 export function createReduxFetch<T>(
   newOptions: OldOptions<T>,
 ): NewStoreReturnType<T> {
