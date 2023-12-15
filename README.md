@@ -2,7 +2,7 @@
 
 - Integrate Redux dispatch api actions into your existing Next JS project.
 
-### Dev in Progress.
+### Dev in Progress (still in beta, not ready for prod).
 
 ### To use
 
