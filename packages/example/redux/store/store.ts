@@ -1,12 +1,13 @@
 import { fetchContent } from "./thunkActions";
 import { createReduxFetch } from "../../../next-redux-fetch";
-
+import { configureStore } from "@reduxjs/toolkit";
 export const store = createReduxFetch({
   reducer: {},
   thunkActions: {
     fetchContent,
   },
 });
+
 // store.dispatch;
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

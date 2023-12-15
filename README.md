@@ -5,3 +5,5 @@
 ### Dev in Progress.
 
 ### To use
+
+- `yarn add next-redux-fetch`

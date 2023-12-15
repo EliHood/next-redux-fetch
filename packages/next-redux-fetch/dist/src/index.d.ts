@@ -16,6 +16,8 @@ type MainNewStore<T, S = any, A extends Action = UnknownAction, M extends Tuple<
     thunkActions: ApiMappedType<T>;
 } & ConfigureStoreOptions<S, A, M, E, P> & Pick<EnhancedStore<S, A, E>, "dispatch" | "getState" | "replaceReducer" | "subscribe">;
 type OldOptions<T> = Omit<MainNewStore<T>, "dispatch" | "getState" | "subscribe" | "replaceReducer">;
-type NewStoreReturnType<T> = Pick<MainNewStore<T>, "dispatch" | "getState" | "subscribe" | "replaceReducer" | "thunkActions">;
+type NewStoreReturnType<T> = Pick<MainNewStore<T>, "dispatch" | "getState" | "subscribe" | "replaceReducer" | "thunkActions"> & {
+    [Symbol.observable]: any;
+};
 export declare function createReduxFetch<T>(newOptions: OldOptions<T>): NewStoreReturnType<T>;
 export {};

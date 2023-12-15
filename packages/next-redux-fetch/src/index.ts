@@ -53,7 +53,7 @@ type OldOptions<T> = Omit<
 type NewStoreReturnType<T> = Pick<
   MainNewStore<T>,
   "dispatch" | "getState" | "subscribe" | "replaceReducer" | "thunkActions"
->;
+> & { [Symbol.observable] };
 
 export function createReduxFetch<T>(
   newOptions: OldOptions<T>,
