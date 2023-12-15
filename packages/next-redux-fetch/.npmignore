@@ -1,6 +1,8 @@
 src/
 # ignore the .ts files
-
+*.ts
+dist/*.ts
+dist/src/*.ts
 # include the .d.ts files
 !*.d.ts
 index.ts
