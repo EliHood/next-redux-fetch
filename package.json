@@ -8,7 +8,9 @@
     "bootstrap": "lerna exec yarn install",
     "start": "lerna run  --parallel start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "lerna clean"
+    "clean": "lerna clean",
+    "prepare": "husky install",
+    "lint": "lerna run --parallel lint"
   },
   "repository": {
     "type": "git",
@@ -20,18 +22,16 @@
     "url": "https://github.com/EliHood/next-redux-fetch/issues"
   },
   "homepage": "https://github.com/EliHood/next-redux-fetch#readme",
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
     "husky": "^8.0.3",
+    "lerna": "^8.0.0",
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.1",
     "rimraf": "^5.0.5",
-    "typescript": "^5.3.3",
-    "lerna": "^8.0.0"
+    "typescript": "^5.3.3"
   }
 }
