@@ -37,10 +37,10 @@ export const fetchContent1 = createAsyncThunk(
 
 ```typescript
 import { fetchContent } from "./thunkActions";
-import { createReduxFetch } from "@mfe/next-redux-fetch";
+import { createReduxFetch } from "next-redux-fetch";
 
 export const store = createReduxFetch(
-  { reducer: {} },
+  { reducer: {}  }, // add in the basic configure store props.
   {
     thunkActions: { fetchContent },
   },
