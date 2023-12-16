@@ -12,9 +12,7 @@
 
 #### 1) Declare thunk functions
 
----
-
-```javascript
+```typescript
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const fetchContent = createAsyncThunk(
   "content/fetchContent",
@@ -37,41 +35,37 @@ export const fetchContent1 = createAsyncThunk(
 
 #### 2) import in `createReduxFetch`
 
----
+```typescript
+import { fetchContent } from "./thunkActions";
+import { createReduxFetch } from "@mfe/next-redux-fetch";
 
-```javascript
-import { fetchContent, fetchContent1 } from "./thunkActions";
-import { createReduxFetch } from "../../../next-redux-fetch";
-import { configureStore } from "@reduxjs/toolkit";
-export const store = createReduxFetch({
-  reducer: {},
-  thunkActions: {
-    fetchContent,
-    fetchContent1
+export const store = createReduxFetch(
+  { reducer: {} },
+  {
+    thunkActions: { fetchContent },
   },
-});
+);
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>;
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch;
 ....
 ```
 
 #### 3) Declare `getData` callback as followed:
 
----
-
-```javascript
+```typescript
 import { store } from "../../../redux/store/store";
 import Bootstrap from "./bootstrap";
 
 async function getData() {
   const res = await store.dispatch(store.thunkActions.fetchContent());
-
   return res;
 }
 
 export default async function Page() {
   const data = await getData();
-
-  console.log("data", data?.payload);
-
   return <Bootstrap data={data} />;
 }
 ```

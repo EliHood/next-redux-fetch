@@ -25,7 +25,9 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ]
+      ],
+
+      "@mfe/next-redux-fetch": ["../next-redux-fetch/index.ts"]
     }
   },
   "include": [

@@ -1,9 +1,12 @@
-import { ConfigureStoreOptions } from "@reduxjs/toolkit";
-import { EnhancedStore } from "@reduxjs/toolkit/dist/configureStore";
 import {
+  ConfigureStoreOptions,
+  EnhancedStore,
   AsyncThunk,
-  AsyncThunkConfig,
-} from "@reduxjs/toolkit/dist/createAsyncThunk";
+  Dispatch,
+  ThunkDispatch,
+  UnknownAction,
+} from "@reduxjs/toolkit";
+import { AsyncThunkConfig } from "@reduxjs/toolkit/dist/createAsyncThunk";
 
 export type ApiMappedType<T> = {
   // eslint-disable-next-line no-unused-vars
@@ -18,10 +21,16 @@ export type ReduxReturnType<T> = {
   [newfield in keyof EnhancedStore<T>]: EnhancedStore[newfield];
 };
 
-export type NewReturnType<T, Action> = ReduxReturnType<T> & {
+export type OlderOptions<T, Action> = ReduxOptions<T> & {
   thunkActions: ApiMappedType<Action>;
 };
 
-export type OlderOptions<T, Action> = ReduxOptions<T> & {
+export type MappedConfigureStore<T> = {
+  [field in keyof ConfigureStoreOptions<T>]: ConfigureStoreOptions[field];
+};
+
+export type NewReturnType<T, Action> = Omit<ReduxReturnType<T>, "dispatch"> & {
   thunkActions: ApiMappedType<Action>;
+  dispatch: ThunkDispatch<any, undefined, UnknownAction> &
+    Dispatch<UnknownAction>;
 };

@@ -1,7 +1,11 @@
-/* eslint-disable no-unused-vars */
 import { configureStore } from "@reduxjs/toolkit";
 import { memoize } from "lodash";
-import { ApiMappedType, NewReturnType, OlderOptions } from "./types";
+import {
+  ApiMappedType,
+  MappedConfigureStore,
+  NewReturnType,
+  OlderOptions,
+} from "./types";
 
 /**
  *
@@ -10,10 +14,15 @@ import { ApiMappedType, NewReturnType, OlderOptions } from "./types";
  */
 
 export function createReduxFetch<T, A>(
-  newOptions: OlderOptions<T, A>,
+  store: MappedConfigureStore<typeof configureStore>,
+  newOptions: Pick<OlderOptions<T, A>, "thunkActions">,
 ): NewReturnType<T, A> {
-  const store = configureStore;
+  const copyStore = configureStore;
   const thunkActions = newOptions?.thunkActions;
+
+  if (!thunkActions) {
+    return;
+  }
 
   const newFuncObj = Object.keys(thunkActions).reduce(
     (acc, fn): ApiMappedType<A> => {
@@ -23,13 +32,8 @@ export function createReduxFetch<T, A>(
     {},
   ) as ApiMappedType<A>;
 
-  function oldOptions(): Omit<OlderOptions<T, A>, "thunkActions"> {
-    delete newOptions.thunkActions;
-    return newOptions;
-  }
-
   const mergeOptions: NewReturnType<T, A> = {
-    ...store(oldOptions()),
+    ...copyStore(store),
     thunkActions: { ...newFuncObj },
   };
 
