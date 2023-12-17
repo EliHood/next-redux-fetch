@@ -53,7 +53,25 @@ export type AppDispatch = typeof store.dispatch;
 ....
 ```
 
-#### 3) Declare `getData` callback as followed:
+#### 3) Declare your client side component in a bootstrap file, or whatever name you prefer.
+
+```typescript
+"use client";
+
+import dynamic from "next/dynamic";
+import React from "react";
+
+const Demo = dynamic(() => import("../../components/demo"), {
+  ssr: false,
+});
+
+export default function Bootstrap({ data }: { data: Record<string, any> }) {
+  return <Demo data={data} />;
+}
+
+```
+
+#### 4) Declare `getData` callback as followed:
 
 ```typescript
 import { store } from "../../../redux/store/store";
@@ -65,7 +83,7 @@ async function getData() {
 }
 
 export default async function Page() {
-  const data = await getData();
+  const data = await getData(); //  destructure data prop on the component your using it on e.g data?.payload.
   return <Bootstrap data={data} />;
 }
 ```
