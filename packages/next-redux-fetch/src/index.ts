@@ -15,7 +15,7 @@ import {
 
 export function createReduxFetch<T, A>(
   store: MappedConfigureStore<typeof configureStore>,
-  newOptions: Pick<OlderOptions<T, A>, "thunkActions">,
+  newOptions?: Pick<OlderOptions<T, A>, "thunkActions">,
 ): NewReturnType<T, A> {
   const copyStore = configureStore;
   const thunkActions = newOptions?.thunkActions;
