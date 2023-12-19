@@ -5,6 +5,7 @@ import {
   Dispatch,
   ThunkDispatch,
   UnknownAction,
+  configureStore,
 } from "@reduxjs/toolkit";
 import { AsyncThunkConfig } from "@reduxjs/toolkit/dist/createAsyncThunk";
 
@@ -34,6 +35,15 @@ export type NewDispatchType = {
     Dispatch<UnknownAction>;
 };
 
-export type NewReturnType<T, Action> = Omit<ReduxReturnType<T>, "dispatch"> & {
-  thunkActions: ApiMappedType<Action>;
-} & NewDispatchType;
+export type NewReturnType<T> = Omit<ReduxReturnType<T>, "dispatch"> &
+  NewDispatchType;
+
+export type HasThunkActions<T> = T extends { thunkActions: infer A }
+  ? A extends {
+      [K in keyof A]: A[K] extends AsyncThunk<any, void, AsyncThunkConfig>
+        ? A[K]
+        : never;
+    }
+    ? T
+    : never
+  : ReturnType<typeof configureStore>;

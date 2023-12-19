@@ -2,9 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import { memoize } from "lodash";
 import {
   ApiMappedType,
+  HasThunkActions,
   MappedConfigureStore,
   NewReturnType,
-  ThunkActions,
 } from "./types";
 
 /**
@@ -12,16 +12,17 @@ import {
  * @param newOptions
  * @returns
  */
-export function createReduxFetch<T, A>(
+export function createReduxFetch<T, Action>(
   store: MappedConfigureStore<typeof configureStore>,
-  newOptions?: ThunkActions<A>,
-): NewReturnType<T, A>;
+  newOptions?: HasThunkActions<Action>,
+): NewReturnType<T> & HasThunkActions<Action>;
 
-export function createReduxFetch<T, A>(
+export function createReduxFetch<A>(
   store: MappedConfigureStore<typeof configureStore>,
-  newOptions?: ThunkActions<A>,
+  newOptions?: { thunkActions: ApiMappedType<A> },
 ): ReturnType<typeof configureStore> {
   const copyStore = configureStore;
+
   const thunkActions = newOptions?.thunkActions;
 
   if (!thunkActions) {
@@ -36,12 +37,12 @@ export function createReduxFetch<T, A>(
     {},
   ) as ApiMappedType<A>;
 
-  const mergeOptions: NewReturnType<T, A> = {
+  const mergeOptions = {
     ...copyStore(store),
     thunkActions: { ...newFuncObj },
   };
 
-  const newStore: NewReturnType<T, A> = {
+  const newStore = {
     ...mergeOptions,
   };
 
