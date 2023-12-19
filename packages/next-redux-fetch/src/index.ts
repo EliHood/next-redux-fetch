@@ -13,7 +13,9 @@ import {
  * @returns
  */
 export function createReduxFetch<T, Action>(
+  // eslint-disable-next-line no-unused-vars
   store: MappedConfigureStore<typeof configureStore>,
+  // eslint-disable-next-line no-unused-vars
   newOptions?: HasThunkActions<Action>,
 ): NewReturnType<T> & HasThunkActions<Action>;
 

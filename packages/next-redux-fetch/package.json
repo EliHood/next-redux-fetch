@@ -1,6 +1,6 @@
 {
   "name": "next-redux-fetch",
-  "version": "1.6.6",
+  "version": "1.6.7",
   "description": "Dispatch thunk actions in place of fetch for data fetching.",
   "main": "dist/index.js",
   "types": "dist/src/index.d.ts",
